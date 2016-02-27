@@ -67,21 +67,17 @@ double minimize_tsp(const Graph &graph){
     //brute force:
     for (size_t i=1;i<graph.nodeCnt();i++){
         Map next;
-        std::cout<<i<<":\n";
-        for( auto cur : costs)
-           std::cout<<"["<<cur.first.first<<","<<cur.first.second<<"]->"<<cur.second<<"\n";
         
         for( auto cur : costs){
            size_t last=cur.first.first;
            size_t set=cur.first.second;
            double cost=cur.second;
-           std::cout<<" set before for " <<set<<"\n";
+           
            for( auto edge : graph.getNeighbors(last)){
                 size_t mask=1<<edge.goal;
-                std::cout<<" set in for " <<set<<"\n";
+                
                 if( !(mask&set)){
                     Configuration con(edge.goal, mask|set);
-                    std::cout<<" config_set: " <<set<<" vs "<<con.second<<"\n";
                     double newCost=cost+edge.weight;
                     auto curCost=next.find(con);
                     if(curCost==next.end())
@@ -120,8 +116,6 @@ int main(){
        if(! std::cin.good() || std::cin.eof())
             break;
        graph.addEdge(from, to, w);
-       std::cout<<"read: "<<from<<" "<<to<<" "<<w<<std::endl;
     }
-    graph.dump();
-    std::cout<<minimize_tsp(graph)<<std::endl;
+    std::cout<<"minimum costs: "<<minimize_tsp(graph)<<std::endl;
 }
