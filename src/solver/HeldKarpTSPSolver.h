@@ -1,13 +1,12 @@
 #pragma once
 
-
 #include <set>
-#include <map>
 #include <utility>
 #include <limits>
-
+#include <type_traits>
 
 #include "TSPGraph.h"
+
 
 /* 
 
@@ -18,10 +17,10 @@
 */
 
 
-
+template<template<typename ... >  class MemType>
 inline double held_karp_sets(const TSPGraph &graph){
     typedef std::pair<size_t, size_t> Configuration;//first - last node, second - visited set
-    typedef std::map<Configuration, double> Map;
+    typedef MemType<Configuration, double> Map;
     Map costs;
     costs[std::make_pair(0, 1)]=0.0;//start in the 0;
     
