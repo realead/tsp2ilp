@@ -7,6 +7,21 @@
 
 #include "TSPGraph.h"
 
+//needed inside of held_karp, we are not using std::pair
+//because we can speziaize a std-template only if a template parameter is user defined
+//needed for std::hash
+
+struct Configuration{
+  size_t last;
+  size_t set;
+  Configuration(size_t l, size_t s):last(l), set(s){}
+};
+
+bool operator<(const Configuration &lhs, const Configuration &rhs){
+  if(lhs.last==rhs.last)
+     return lhs.set<rhs.set;
+  return lhs.last<rhs.last;
+}
 
 /* 
 
@@ -19,18 +34,17 @@
 
 template<template<typename ... >  class MemType>
 inline double held_karp_sets(const TSPGraph &graph){
-    typedef std::pair<size_t, size_t> Configuration;//first - last node, second - visited set
     typedef MemType<Configuration, double> Map;
     Map costs;
-    costs[std::make_pair(0, 1)]=0.0;//start in the 0;
+    costs[Configuration(0, 1)]=0.0;//start in the 0;
     
     //find best hamiltonian paths from 0 to any other node:
     for (size_t i=1;i<graph.nodeCnt();i++){
         Map next;
         
         for( auto cur : costs){
-           size_t last=cur.first.first;
-           size_t set=cur.first.second;
+           size_t last=cur.first.last;
+           size_t set=cur.first.set;
            double cost=cur.second;
            
            for( auto edge : graph.getNeighbors(last)){
@@ -54,7 +68,7 @@ inline double held_karp_sets(const TSPGraph &graph){
     double res=std::numeric_limits<double>::infinity();
     
     for( auto cur : costs){
-       size_t last=cur.first.first;
+       size_t last=cur.first.last;
        double cost=cur.second;
        for( auto edge : graph.getNeighbors(last))
             if(edge.goal==0)
