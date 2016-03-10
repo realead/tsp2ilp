@@ -1,5 +1,5 @@
 #include <iostream>
-#include <map>
+#include <unordered_map>
 
 #include "TSPGraph.h"
 #include "HeldKarpTSPSolver.h"
@@ -8,7 +8,7 @@
 
 int main(){
     TSPGraph graph=readTSPGraph(std::cin);
-    std::cout<<"minimum costs: "<<held_karp_sets<std::map>(graph)<<std::endl;
+    std::cout<<"minimum costs: "<<held_karp_sets<std::unordered_map>(graph)<<std::endl;
 }
 
 

@@ -17,11 +17,27 @@ struct Configuration{
   Configuration(size_t l, size_t s):last(l), set(s){}
 };
 
-bool operator<(const Configuration &lhs, const Configuration &rhs){
+inline bool operator<(const Configuration &lhs, const Configuration &rhs){
   if(lhs.last==rhs.last)
      return lhs.set<rhs.set;
   return lhs.last<rhs.last;
 }
+
+inline bool operator==(const Configuration &lhs, const Configuration &rhs){
+  return lhs.last==rhs.last &&  lhs.set==rhs.set;
+}
+
+namespace std{
+template<>
+struct hash<Configuration>{
+    size_t operator()(const Configuration & x) const
+    {
+      //FIXME: a better hash function!
+      return (x.last*311+x.set)%3036581853143L;
+    }
+  };
+}
+
 
 /* 
 
