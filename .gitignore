@@ -1,2 +1,7 @@
 *~
 *.pyc
+*.lp
+bin
+*.graph
+*.tsp
+*.txt
