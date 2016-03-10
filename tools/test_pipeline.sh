@@ -8,14 +8,14 @@ time java -cp ../bin TSP < temp.tsp
 
 
 echo "\n\n\n\nbrute force hash:"
-time ../bin/tsp < temp.graph
+time ../bin/held_karp_tree < temp.graph
 
 echo "\n\n\n\nbrute force:"
 time ../bin/tsp_opt < temp.graph
 
-python ../src/tsp2ilp/tsp2ilp.py temp.graph temp.lp > log.txt
-
-echo "\n\nilp:\n\n"
-time ../bin/lp_solve temp.lp | grep "Value of objective"
-
-echo "\n\n\n"
+#python ../src/tsp2ilp/tsp2ilp.py temp.graph temp.lp > log.txt
+#
+#echo "\n\nilp:\n\n"
+#time ../bin/lp_solve temp.lp | grep "Value of objective"
+#
+#echo "\n\n\n"
