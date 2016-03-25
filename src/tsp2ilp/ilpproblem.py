@@ -110,32 +110,29 @@ class ILProblem:
     def define_as_int_vars(self,var_names):
         self.int_vars.update(var_names)
     
-    def export(self):
+    def export(self, exporter):
         res=[];
         
         #header:
-        res.append("/* "+self.comment+" */\n")
-        res.append("\n")
-        
+        exporter.comment_found(self.comment)
+        exporter.empty_line_found()
+         
         #cost fun:
-        res.append(self.cost_fun.toString()+"\n")
-            
-        res.append("\n");
+        exporter.cost_fun_found(self.cost_fun)      
+        exporter.empty_line_found()
         
         #constrains:
         for constrain in self.constrains:
-            res.append(constrain.toString()+"\n")
+            exporter.constrain_found(constrain)
+        exporter.empty_line_found()
         
-        
-        res.append("\n");
         #definitions:
         #bin:
-        res.append("bin "+", ".join(self.bin_vars)+";\n")
-        
+        exporter.bin_vars_found(self.bin_vars)
+               
         #int: 
-        res.append("int "+", ".join(self.int_vars)+";\n")
+        exporter.int_vars_found(self.int_vars)
         
-        return res;
             
 
 if __name__=="__main__":

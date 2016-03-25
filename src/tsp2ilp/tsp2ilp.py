@@ -10,7 +10,8 @@
 
 
 import graph as tspg
-from ilpproblem import ILConstrain, ILProblem 
+from ilpproblem import ILConstrain, ILProblem
+from ilpexport import LPExporter
 
 def graph2ilp(tspGraph):
 
@@ -74,8 +75,11 @@ def graph2ilp(tspGraph):
 def transform_graph2ilp(file_name_graph, file_name_ilp):
     tspGraph=tspg.read_TSPGraph(input_file)
     problem=graph2ilp(tspGraph) 
+    exporter=LPExporter()
+    problem.export(exporter)
+    
     with open(output_file,'w') as f:
-        f.writelines(problem.export())  
+        f.writelines(exporter.get_lines())  
         
 
 
