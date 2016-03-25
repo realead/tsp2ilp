@@ -11,6 +11,26 @@ def coeff_sum(coeff_map):
         res+=sign+str(abs(coeff))+" "+str(var_name)+" "
         
     return res
+
+class CostFunction:
+     #constants:
+    MIN="min"
+    MAX="max"
+    COST_KIND= {MIN :'min',
+                MAX :'max'}
+                
+    def __init__(self, KIND="min"):
+        self.pref = CostFunction.COST_KIND[KIND]
+        self.cost_fun=None
+        
+    def set_coeff_map(self, coeff_map):
+        self.cost_fun=dict(coeff_map) 
+        
+    def toString(self):
+        if self.cost_fun is None:
+            return self.pref+":"
+        else:
+            return self.pref+": "+coeff_sum(self.cost_fun)+";"  
     
 class ILConstrain:
     #constants:
@@ -73,7 +93,7 @@ class ILProblem:
         self.bin_vars=set()
         self.int_vars=set()
         self.free_vars=set()
-        self.cost_fun=None
+        self.cost_fun=CostFunction()
     
     def add_constrain(self, constrain):
         self.constrains.append(constrain)
@@ -82,7 +102,7 @@ class ILProblem:
         self.constrains.extend(constrains)
         
     def set_cost_fun(self,coeff_map):
-        self.cost_fun=dict(coeff_map)
+        self.cost_fun.set_coeff_map(coeff_map)
         
     def define_as_bin_vars(self, var_names):
         self.bin_vars.update(var_names)
@@ -98,10 +118,7 @@ class ILProblem:
         res.append("\n")
         
         #cost fun:
-        if self.cost_fun is None:
-            res.append("min:\n")
-        else:
-            res.append("min: "+coeff_sum(self.cost_fun)+";\n")
+        res.append(self.cost_fun.toString()+"\n")
             
         res.append("\n");
         
