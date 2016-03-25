@@ -23,7 +23,11 @@ class TSPGraph:
         return iter(self.graph)
     
   
+    def get_node_cnt(self):
+        return len(self.nodeMap)
     
+    def __len__(self):
+        return self.get_node_cnt()
         
     def add_edge(self, start, goal, weight):
         Edge = namedtuple('Edge', 'start goal weight')
