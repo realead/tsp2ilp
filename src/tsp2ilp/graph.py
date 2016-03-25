@@ -77,7 +77,7 @@ def read_TSPGraph(file_name):
             
 
 #creates a complete graph with costs of the edges equal to the
-def create_TSPGraph_from_2dpoints(points):
+def create_TSPGraph_from_2dpoints(points, do_round=True):
     graph=TSPGraph()
     n = len(points)
     for i in xrange(0,n):
@@ -86,7 +86,9 @@ def create_TSPGraph_from_2dpoints(points):
             p2=points[j]
             dx=p1[0]-p2[0]
             dy=p1[1]-p2[1]
-            d=int(round(math.hypot(dx, dy)))
+            d=math.hypot(dx, dy)
+            if do_round:
+                 d=int(round(d))
             graph.add_edge(i,j,d)
             graph.add_edge(j,i,d)
             
