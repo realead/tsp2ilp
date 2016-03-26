@@ -15,7 +15,7 @@ class LPExporter:
         self.lines.append(cost_fun.toString()+'\n')
             
     def constrain_found(self, constrain):
-        self.lines.append(constrain.toString()+'\n')
+        self.lines.append(constrain.toString()+';\n')
         
     def bin_vars_found(self, bin_vars):
         self.lines.append("bin "+", ".join(bin_vars)+";\n")

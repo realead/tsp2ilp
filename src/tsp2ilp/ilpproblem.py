@@ -93,7 +93,7 @@ class ILConstrain:
         res+=coeff_sum(self.coeff_map) 
             
         res+=self.op
-        res+=" "+str(self.result)+";"
+        res+=" "+str(self.result)
         
         return res; 
         
