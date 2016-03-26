@@ -72,10 +72,9 @@ def graph2ilp(tspGraph):
     return problem
     
 
-def transform_graph2ilp(file_name_graph, file_name_ilp):
+def transform_graph2ilp(file_name_graph, file_name_ilp, exporter):
     tspGraph=tspg.read_TSPGraph(file_name_graph)
     problem=graph2ilp(tspGraph) 
-    exporter=LPExporter()
     problem.export(exporter)
     
     with open(file_name_ilp,'w') as f:
@@ -95,13 +94,13 @@ if __name__=="__main__":
     args = parser.parse_args()
     
 
-    if args.LP:
-        transform_graph2ilp(args.input_file, args.output_file)
-    elif args.IBMLP:
+    if args.IBMLP:
         print "this feature is not yet implemented"
     else:
-        print "LP as default"
-        transform_graph2ilp(args.input_file, args.output_file)
+        if not args.LP:
+            print "using LP as default"
+        used_exporter=LPExporter()
+        transform_graph2ilp(args.input_file, args.output_file, used_exporter)
         
 
 
