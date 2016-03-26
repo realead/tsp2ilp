@@ -11,7 +11,7 @@
 
 import graph as tspg
 from ilpproblem import ILConstrain, ILProblem
-from ilpexport import LPExporter
+from ilpexport import LPExporter, IBMLPExporter
 
 def graph2ilp(tspGraph):
 
@@ -95,7 +95,8 @@ if __name__=="__main__":
     
 
     if args.IBMLP:
-        print "this feature is not yet implemented"
+        used_exporter=IBMLPExporter()
+        transform_graph2ilp(args.input_file, args.output_file, used_exporter)
     else:
         if not args.LP:
             print "using LP as default"

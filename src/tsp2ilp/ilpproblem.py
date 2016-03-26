@@ -30,7 +30,20 @@ class CostFunction:
         if self.cost_fun is None:
             return self.pref+":"
         else:
-            return self.pref+": "+coeff_sum(self.cost_fun)+";"  
+            return self.pref+": "+coeff_sum(self.cost_fun)+";" 
+    
+    
+    def isMin(self):
+        return self.pref==CostFunction.COST_KIND[CostFunction.MIN]
+    
+    def isMax(self):
+        return self.pref==CostFunction.COST_KIND[CostFunction.MAX]
+        
+    def getObjectiveAsString(self):
+        if self.cost_fun is None:
+            return "0"
+        else:
+            return coeff_sum(self.cost_fun)
     
 class ILConstrain:
     #constants:
