@@ -73,23 +73,38 @@ def graph2ilp(tspGraph):
     
 
 def transform_graph2ilp(file_name_graph, file_name_ilp):
-    tspGraph=tspg.read_TSPGraph(input_file)
+    tspGraph=tspg.read_TSPGraph(file_name_graph)
     problem=graph2ilp(tspGraph) 
     exporter=LPExporter()
     problem.export(exporter)
     
-    with open(output_file,'w') as f:
+    with open(file_name_ilp,'w') as f:
         f.writelines(exporter.get_lines())  
         
 
 
 
 if __name__=="__main__":            
-    import sys
-    input_file=sys.argv[1]
-    output_file=sys.argv[2]
+    import argparse
+    parser = argparse.ArgumentParser(description="transforms a list of edges into a integer linear problem")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("--LP", action="store_true", help="lp format used in lp_solve (default)")
+    group.add_argument("--IBMLP", action="store_true", help="IBM lp format used in CPLEX")
+    parser.add_argument("input_file", type=str, help="file in which the graph (as list of edges) is stored")
+    parser.add_argument("output_file", type=str, help="file in which the resulting ilp should be stored")
+    args = parser.parse_args()
+    
 
-    transform_graph2ilp(input_file, output_file)
+    if args.LP:
+        transform_graph2ilp(args.input_file, args.output_file)
+    elif args.IBMLP:
+        print "this feature is not yet implemented"
+    else:
+        print "LP as default"
+        transform_graph2ilp(args.input_file, args.output_file)
+        
+
+
 
 
     
