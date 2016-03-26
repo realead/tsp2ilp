@@ -33,10 +33,10 @@ class IBMLPExporter:
         self.first_constrain=True
     
     def  comment_found(self, comment):
-        pass # no comments
+         pass#self.lines.append("/* "+comment+" */\n")
         
     def  empty_line_found(self):
-        pass # no lines
+         pass#self.lines.append("\n")
        
     def cost_fun_found(self, cost_fun):
         if cost_fun.isMax():
