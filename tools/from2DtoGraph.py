@@ -13,10 +13,10 @@ with open(input_file,'r') as f:
     for line in f:
         line=line.strip()
         try:
-            print line
+            #print line
             points2d.append(map(int, line.split()))
         except Exception as e:
-            print e
+            #print e
             pass
         
 n=len(points2d)
@@ -24,7 +24,7 @@ print "There are {0} points".format(n)
 
 points=[point[1:] for point in points2d]
 
-print points
+#print points
 
 graph=tspg.create_TSPGraph_from_2dpoints(points)
 graph.save_to_file(output_file)

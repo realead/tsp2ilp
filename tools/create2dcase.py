@@ -1,6 +1,8 @@
 
 import sys
 
+print sys.argv
+
 output_file=sys.argv[1]
 n=int(sys.argv[2])
 
