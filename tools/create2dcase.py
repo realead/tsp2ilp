@@ -1,11 +1,15 @@
 
-import random
-random.seed(20)
-
 import sys
 
 output_file=sys.argv[1]
 n=int(sys.argv[2])
+
+seed=int(sys.argv[3])
+
+import random
+random.seed(seed)
+
+
 
 with open(output_file, 'w') as f:
     f.write("NAME : UNKNOWN\n")

@@ -1,12 +1,13 @@
 
 
-python create2dcase.py temp.tsp 17
+python create2dcase.py temp.tsp 18 20
 python from2DtoGraph.py temp.tsp temp.graph
 
 #echo "java:"
 #time java -cp ../bin TSP < temp.tsp
 
 
+#brute force approaches:
 echo "\n\n\n\nbrute force tree:"
 time ../bin/held_karp_tree < temp.graph
 
