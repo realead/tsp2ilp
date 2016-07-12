@@ -33,7 +33,7 @@ echo "\n\nscip:\n\n"
 time ../bin/scip -f temp_ibm.lp | grep "objective value"
 
 echo "\n\nglpsol:\n\n"
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/ed/mygithub/glpk-4.59/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../third_party/glpk-4.59/lib
 time ../bin/glpsol --lp temp_ibm.lp | grep "tree is empty"
 
 echo "\n\n\n"
