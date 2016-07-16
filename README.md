@@ -51,10 +51,10 @@ All solvers have been running with default settings (1 CPU)
 #### Random points in 2d:
 
                  N=15 (out of 10)              N=20 (out of 10)                N=25 (out of 10)
-glpk             0                             not tested                      not tested
-lp_solve         5  (less than 200s)           6(less than 300s)
-scip             10 (average .9s)              10 (average 3.5s)               10 (average 63s, min 1s, max 130s, less than 500MB needed)
-held_karp(opt)   10 (average .01s)             10 (average 0.5s)               10 (average 24s, ca. 8GB needed, hash-version needs more than 10min, no memory savings)
+    glpk             0                             not tested                      not tested
+    lp_solve         5  (less than 200s)           6(less than 300s)
+    scip             10 (average .9s)              10 (average 3.5s)               10 (average 63s, min 1s, max 130s, less than 500MB needed)
+    held_karp(opt)   10 (average .01s)             10 (average 0.5s)               10 (average 24s, ca. 8GB needed, hash-version needs more than 10min, no memory savings)
 
 #### Random graphs:
 
@@ -62,24 +62,26 @@ Created by the script ./tools/create_case.py with:
 
 a) 0.4*n edges per vertex on average, weights 0..100
 
-                 N=15 (out of 10)              N=20 (out of 10)                N=25 (out of 10)         N=40(out of 10, less 60s)    N=100(out of 10, 120s) 
-glpk             10 (0s)                       7 (average 0.0 for success)     10 (average 0s)          7                            0
-lp_solve         10 (0s)                       10 (0s)                         10 (average 0s)          9                            4
-scip             10 (average .9s)              10 (0s)                         10 (0.2s)                10                           8
-held_karp(opt)   10 (average .01s)             10 (0.3s)                       10 (average 15s)
+                 N=15 (out of 10)    N=20 (out of 10)   N=25 (of 10)  N=40(of 10, less 60s)    N=100(of 10, 120s) 
+    glpk             10 (0s)              7 (0s)           10 (0s)          7                            0
+    lp_solve         10 (0s)              10 (0s)          10 (0s)          9                            4
+    scip             10 (average .9s)     10 (0s)          10 (0.2s)        10                           8
+    held_karp(opt)   10 (average .01s)    10 (0.3s)        10 (average 15s)
 
 
 b) .4*n edges per vertex on average, all weights 1, seems to be harder to solve for scip but easier for lp_solve
+
                  N=40 (out of 10, 120s)       N=100 (out of 10)         
-glpk             5                            0
-lp_solve         10 (0s)                      10(4s)
-scip             6                            0
+    glpk             5                            0
+    lp_solve         10 (0s)                      10(4s)
+    scip             6                            0
 
 c) .6*n edges per vertex on average, weights 0..100
+
                  N=40 (out of 10, 120s)       N=100 (out of 10)         
-glpk             10 (0.2s)                    0
-lp_solve         10 (0.5s)                    3
-scip             10 (2.5s)                    8
+    glpk             10 (0.2s)                    0
+    lp_solve         10 (0.5s)                    3
+    scip             10 (2.5s)                    8
 
 
 
