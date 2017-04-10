@@ -1,4 +1,6 @@
 
+mkdir -p ../bin
+
 #build cpp solver:
 g++ -std=c++11 -O3 ../src/solver/held_karp_tree.cpp -o ../bin/held_karp_tree
 g++ -std=c++11 -O3 ../src/solver/held_karp_hash.cpp -o ../bin/held_karp_hash
